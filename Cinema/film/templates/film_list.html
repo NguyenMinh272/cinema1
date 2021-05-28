@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  img{
+  width:100%;
+  }
+  body{
+  background-color: linear-gradient(#e66465, #9198e5) !important;
+  }
+
+</style>
+
+<div class="card card-sm mb-3 card-sponsored sponsored-movie-tracking">
+  <span class="sprite featured"></span>
+   {% for film in films %}
+    <div class="card" >
+        <div class="card-body">
+        <div class="row" style="padding-left:100px;">
+            <div class="col col-sm-2 ">
+                <a href="{{film.title}}">
+                    <img src="{{film.poster.url}}" alt="{{film.title}}" class="rounded img-fluid">
+                </a>
+            </div>
+            <div class="col ml-n2">
+                <h3 class="card-title mb-1 name">
+                    <a href="{% url 'FilmDetail' film.id %}" style="text-decoration: none!important; color: #000000; ">
+                        {{film.title}}
+                    </a>
+                </h3>
+
+                <p class="card-text small text-muted mb-0">
+                  Face Off ·
+                  NC18 ·
+                  <a href="{{film.trailer.url}}">Trailer</a>
+                </p>
+
+
+              <div class="mt-2">
+                <div class="mb-1">
+                <label class="small mb-2 font-weight-bold d-block text-dark">
+                    2D Phụ Đề {{film.languages}}
+                </label>
+                    {% for t in post.time.all %}
+                  <a href="{% url 'MovieDetail' post.id %}" class="btn btn-sm btn-showtime disabled btn-light is-redirecting">
+                  <span class="time">{{t.time}}</span>
+                  </a>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}

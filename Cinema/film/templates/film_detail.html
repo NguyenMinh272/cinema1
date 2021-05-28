@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load embed_video_tags %}
+{% block mdcss %}
+<link rel="stylesheet" href="{% static 'm-detail.css'%}">
+{% endblock mdcss %}
+{% block content %}
+
+<div class="bg-dark border-bottom text-white featured-movie" style="background-color:#242333 !important; width:100%; height: 400px;">
+    <div class="container pt-3 pb-3">
+        <div class="row row-sm">
+            <div class="d-none d-sm-block col-2">
+                <a href="" title="{{film_detail.title}}">
+                    <img alt="{{film_detail.title}}" src="{{film_detail.poster.url}}" style="width:170px; height:250px; padding-top:12px; box-shadow: -4px 4px 5px 0 #000;">
+                </a>
+            </div>
+            <div class="col-12 col-sm-10">
+                <div class="mb-3 text-sm-left">
+                    <h1 class="mb-0 text-truncate">
+                        <a href="{{film_detail.title}}" title="{{film_detail.title}}", style="color: #ffffff; text-decoration:none ">
+                            {{film_detail.title}}
+                        </a>
+                    </h1>
+                    <p class="mb-0 text-muted text-truncate">
+                        {{film_detail.gernes}}
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <p class="mb-3 text-justify" style="text-align: justify!important">{{film_detail.storyline}}</p>
+                        <div class="row mb-3">
+                            <div class="col text-center text-sm-left">
+                                <strong>
+                                    <i class="fe fe-calendar"></i>
+                                    <span class="d-none d-sm-inline-block">Khởi chiếu</span>
+                                    </strong><br>
+                                    <span>{{film_detail.release_date}}</span>
+                            </div>
+
+                            <div class="col text-center text-sm-left">
+                                <strong>
+                                    <i class="fe fe-clock"></i>
+                                    <span class="d-none d-sm-inline-block">Thời lượng</span>
+                                    </strong><br>
+                                    <span>{{film_detail.run_time}} phút</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <p class="mb-2"  >
+                            <strong > Diễn viên</strong><br>
+                            <span style="color: #f33636;">
+                              {{film_detail.stars}}
+                            </span>
+                        </p>
+                        <p class="mb-2">
+                            <strong> Đạo diễn</strong><br>
+                            <span style="color: #f33636;">
+                                {{film_detail.creators}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="bg-white border-bottom sticky-movie-bars">
+    <div class="container">
+        <ul class="nav nav-tabs border-bottom-0">
+            <li class="nav-item">
+                <a href="{% url 'FilmDetail' film_detail.id %}" class="nav-link text-center active">
+                    Thông tin phim
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'FilmList' %}" class="nav-link text-center">
+                    Lịch chiếu
+                </a>
+            </li>
+            <li class="nav-item d-none d-sm-block">
+                <a href="" class="nav-link text-center">
+                    Tin tức
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-center">
+                        Mua vé
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 left-box ">
+        <div class="js-video youtube widescreen mb-4" style="padding-left:120px;">{% video film_detail.trailer '750x500' %}</div>
+    </div>
+</div>
+
+{% endblock content %}
